@@ -1,0 +1,45 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+        ArrayList<Integer> sub1 = new ArrayList<>();
+        ArrayList<Integer> sub2 = new ArrayList<>();
+        ar.add(sub1);
+        ar.add(sub2);
+        for(int i=0;i<matrix.length;i++)
+        {
+            for(int j=0;j<matrix[0].length;j++)
+            {
+                ArrayList<Integer> temp1 = ar.get(0);
+                 ArrayList<Integer> temp2 = ar.get(1);
+                if(matrix[i][j]==0)
+                {
+                    if(!temp1.contains(i))
+                    {
+                        temp1.add(i);
+                    }
+                    if(!temp2.contains(j))
+                    {
+                        temp2.add(j);
+                    }
+                }
+
+            }
+        }
+        ArrayList<Integer> temp1 = ar.get(0);
+        ArrayList<Integer> temp2 = ar.get(1);
+        for(int k=0;k<temp1.size();k++)
+        {
+            for(int l=0;l<matrix[0].length;l++)
+            {
+                matrix[temp1.get(k)][l]=0;
+            }
+        }
+        for(int k=0;k<temp2.size();k++)
+        {
+            for(int l=0;l<matrix.length;l++)
+            {
+                matrix[l][temp2.get(k)]=0;
+            }
+        }
+    }
+}
