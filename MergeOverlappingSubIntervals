@@ -1,0 +1,98 @@
+Coding Ninjas
+
+import java.util.* ;
+import java.io.*; 
+/*******************************************************
+
+    Following is the Interval class structure
+
+    class Interval {
+        int start, int finish;
+
+        Interval(int start, int finish) {
+            this.start = start;
+            this.finish = finish;
+        }
+    }
+    
+*******************************************************/
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
+class SortByStart implements Comparator<Interval>
+{
+    public int compare(Interval a,Interval b)
+    {
+        return a.start - b.start;
+    }
+
+}
+public class Solution {
+    public static List<Interval> mergeIntervals(Interval[] intervals) {
+        // write your code here.
+        Arrays.sort(intervals,new SortByStart());
+        List<Interval> li = new ArrayList<>();
+        Interval a = new Interval(intervals[0].start,intervals[0].finish);
+        li.add(a);
+        int temp = intervals[0].finish,idx=0;
+        for(int i=1;i<intervals.length;i++)
+        {
+            if(temp>= intervals[i].start)
+            {
+                li.set(idx,new Interval(li.get(idx).start,Integer.max(li.get(idx).finish,intervals[i].finish)));
+                temp = Integer.max(li.get(idx).finish,intervals[i].finish);
+            }
+            else
+            {
+                li.add(new Interval(intervals[i].start,intervals[i].finish ));
+                temp= intervals[i].finish;
+                idx++;
+            }
+        }
+        return li;
+    }
+}
+
+
+
+leetcode Platform
+
+
+class SortByStart implements Comparator<int[]>
+{
+    public int compare(int[] a,int[] b)
+    {
+        return a[0]-b[0];
+    }
+}
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        int [][]res = new int[intervals.length][2];
+        Arrays.sort(intervals,new SortByStart());
+        res[0]= intervals[0];
+        int temp = intervals[0][1];
+        int k=0;
+        for(int i=1;i<intervals.length;i++)
+        {
+            // res[i] = intervals[i];
+            if(temp >= intervals[i][0])
+            {
+                 temp = Math.max(intervals[i][1],res[k][1]);
+                res[k][1] = Math.max(intervals[i][1],res[k][1]);
+            }
+            else
+            {
+                k++;
+                res[k] = intervals[i];
+                temp = intervals[i][1];
+            }
+        }
+        int finalres[][] = new int[k+1][2];
+        for(int i=0;i<=k;i++)
+        {
+            finalres[i]=res[i];
+        }
+        return finalres;
+    }
+}
