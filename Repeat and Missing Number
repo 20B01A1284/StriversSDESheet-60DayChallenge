@@ -1,0 +1,58 @@
+interview bit
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int[] repeatedNumber(final int[] A) {
+        long sum = 0,sum2=0;
+        int n=A.length;
+        for(int i=0;i<A.length;i++)
+        {
+            sum += (long)A[i];
+            sum2 += ((long)A[i]*(long)A[i]);
+        }
+        long sumn = ((long)n*(long)(n+1))/2;
+        long sumn2 = ((long)n*(long)(n+1)*(long)(2*n+1))/6;
+        long xaddy = sumn-sum;
+        long xminusy = (sumn2-sum2)/xaddy;
+        long x=(xaddy+xminusy)/2;
+        long y=x-xaddy;
+        int[] res = new int[2];
+        res[1] = (int)x;
+        res[0]=(int)y;
+        return res;
+        
+    }
+}
+coding ninjas
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        // Write your code here
+
+        int res[] = new int[2];
+        HashMap<Integer,Integer> hm= new HashMap<>();
+        for(int i=1;i<=n;i++)
+        {
+            hm.put(i,0);
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(hm.containsKey(arr.get(i)))
+                hm.put(arr.get(i),hm.get(arr.get(i))+1);
+        }
+        for(int key : hm.keySet())
+        {
+            if(hm.get(key)==0)
+            {
+                res[0] = key;
+            }
+            if(hm.get(key)>1)
+                res[1]=key;
+        }
+        return res;
+    }
+}
+
