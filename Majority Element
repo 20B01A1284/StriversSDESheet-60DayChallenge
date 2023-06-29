@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+	public static int findMajority(int[] arr, int n) {
+		// Write your code here.
+		HashMap<Integer,Integer> hm = new HashMap<>();
+		for(int i=0;i<n;i++)
+		{
+			if(!hm.containsKey(arr[i]))
+			{
+				hm.put(arr[i],1);
+			}
+			else
+			{
+				hm.put(arr[i],hm.get(arr[i])+1);
+			}
+		}
+		int max=Integer.MIN_VALUE,maxele=-1;
+		for(int key:hm.keySet())
+		{
+			if(hm.get(key) > n/2)
+			{
+				if(max < hm.get(key))
+				{
+					maxele = key;
+				}
+			}
+		}
+		return maxele;
+	}
+}
