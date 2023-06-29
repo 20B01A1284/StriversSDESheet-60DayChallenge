@@ -1,0 +1,20 @@
+public class Solution {
+    public static int modularExponentiation(int x, int n, int m) {
+        long res = 1;
+        long base= x % m;
+        
+        while (n > 0) {
+            if (n % 2 == 1) {
+                res = (res * base) % m;
+                n--;
+            }
+            else 
+            {
+                base=(base*base)%m;
+                n=n/2;
+            }
+        }
+        
+        return (int) res;
+    }
+}
